@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: words-db
+  labels:
+    app: words-db
+spec:
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: words-db
+  selector:
+    app: words-db
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: words-db
+  labels:
+    app: words-db
+spec:
+  selector:
+    matchLabels:
+      app: words-db
+  template:
+    metadata:
+      labels:
+        app: words-db
+    spec:
+      containers:
+      - name: db
+        image: harbor.ocplab.cn/k8ssamples/k8s-words-db:v1.0
+        ports:
+        - containerPort: 5432
+          name: db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: words-api
+  labels:
+    app: words-api
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      name: words-api
+  selector:
+    app: words-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: words-api
+  labels:
+    app: words-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: words-api
+  template:
+    metadata:
+      labels:
+        app: words-api
+    spec:
+      containers:
+      - name: api
+        image: harbor.ocplab.cn/k8ssamples/k8s-words-api:v1.0
+        env:
+          - name: WORDS_DB_SERVICE
+            value: words-db
+        ports:
+        - containerPort: 8080
+          name: api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: words-web
+  labels:
+    app: words-web
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      name: words-web
+  selector:
+    app: words-web
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: words-web
+  labels:
+    app: words-web
+spec:
+  selector:
+    matchLabels:
+      app: words-web
+  template:
+    metadata:
+      labels:
+        app: words-web
+    spec:
+      containers:
+      - name: words-web
+        image: harbor.ocplab.cn/k8ssamples/k8s-words-web:v1.0
+        env:
+          - name: WORDS_API_SERVICE
+            value: words-api
+        ports:
+        - containerPort: 80
+          name: words-web

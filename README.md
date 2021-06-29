@@ -1,6 +1,6 @@
-# Kubernetes Wordsmith Demo
+# Kubernetes Words Demo
 
-Wordsmith is the demo project on k8s.
+Words is the demo project on k8s.
 
 The demo app runs across three containers:
 

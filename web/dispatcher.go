@@ -5,10 +5,11 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
-        "os"
+    "os"
 	"net"
 	"net/http"
 	"time"
+	"encoding/json"
 )
 
 func main() {
@@ -17,6 +18,7 @@ func main() {
 	fwd := &forwarder{os.Getenv("WORDS_API_SERVICE"), 8080}
 	http.Handle("/words/", http.StripPrefix("/words", fwd))
 	http.Handle("/", http.FileServer(http.Dir("static")))
+    http.HandleFunc("/envs", GetEnvs)
 
 	fmt.Println("Listening on port 80")
 	http.ListenAndServe(":80", nil)
@@ -25,6 +27,15 @@ func main() {
 type forwarder struct {
 	host string
 	port int
+}
+
+func GetEnvs(w http.ResponseWriter, r *http.Request) {
+     envs := make(map[string]string)
+     envs["cluster"] = os.Getenv("APP_CLUSTER")
+     envs["version"] = os.Getenv("APP_VERSION")
+     w.Header().Set("Content-Type", "application/json")
+     json.NewEncoder(w).Encode(envs)
+     log.Printf("Get env %s", envs)
 }
 
 func (f *forwarder) ServeHTTP(w http.ResponseWriter, r *http.Request) {

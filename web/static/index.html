@@ -7,7 +7,14 @@
 </head>
 
 <body>
-  <div class="logo"><img src="images/tanzu.png" style="width:50%"/></div>
+  <div class="logo" ng-controller="LabCtrl">
+    <img src="images/tanzu.png" style="width:50%"/>
+    <span class="custom-version" style="margin-left: 18%;" ng-bind="env.version" ng-if="env.version && !env.cluster"></span>
+    <span class="custom-version" style="margin-left: 18%;" ng-bind="env.cluster" ng-if="env.cluster && !env.version"></span>
+    <span class="custom-version" style="margin-left: 10%;" ng-bind="env.version" ng-if="env.cluster && env.version"></span>
+    <span class="custom-version" style="margin-left: 15.3%;" ng-bind="env.placeholder" ng-if="env.cluster && env.version"></span>
+    <span class="custom-version" style="margin-left: 16%;" ng-bind="env.cluster" ng-if="env.cluster && env.version"></span>
+  </div>
 
 <div class="sentence" ng-controller="LabCtrl">
   <div class="line line1 slide-in">

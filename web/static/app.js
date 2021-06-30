@@ -8,6 +8,11 @@ lab.controller('LabCtrl', function ($scope, $http, $timeout) {
   $scope.adjective1 = "";
   $scope.adjective2 = "";
   $scope.verb = "";
+  $scope.env = "";
+
+  getEnv($http, $timeout, '/envs', function(resp) {
+    $scope.env = envParse(resp);
+  });
 
   getWord($http, $timeout, '/words/noun?n=1', function(resp1) {
     $scope.noun1 = word(resp1);
@@ -30,6 +35,7 @@ lab.controller('LabCtrl', function ($scope, $http, $timeout) {
   getWord($http, $timeout, '/words/adjective?n=2', function(resp) {
     $scope.adjective2 = word(resp);
   });
+
 });
 
 function getWord($http, $timeout, url, callback) {
@@ -41,9 +47,26 @@ function getWord($http, $timeout, url, callback) {
   });
 }
 
+function getEnv($http, $timeout, url, callback) {
+  $http.get(url).then(callback, function(resp) {
+    $timeout(function() {
+      console.log("Retry: " + url);
+      getEnv($http, $timeout, url, callback);
+    }, 500);
+  });
+}
+
 function word(resp) {
   return {
     word: resp.data.word,
     hostname: resp.headers()["source"]
+  };
+}
+
+function envParse(resp) {
+  return {
+    cluster: resp.data.cluster,
+    version: resp.data.version,
+    placeholder: '/'
   };
 }

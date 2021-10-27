@@ -11,20 +11,20 @@ This demo app included three containers:
 - [web](web/Dockerfile) - a Go web application which calls the API and builds words into sentences:
 
 
-## Before deploy the app, build images and push to your Registry
+## Before deploy the app to k8s, build images and push to your Registry
 
 Create a Registry Project `k8s-word-demo`
 
 ```
-docker build -t k8s-words-db:v1.0
-docker build -t k8s-words-api:v1.0
-docker build -t k8s-words-web:v1.0
-docker tag k8s-words-db:v1.0 REGISTRY_URL/k8s-word-demo/k8s-words-db:v1.0
-docker tag k8s-words-api:v1.0 REGISTRY_URL/k8s-word-demo/k8s-words-api:v1.0
-docker tag k8s-words-web:v1.0 REGISTRY_URL/k8s-word-demo/k8s-words-web:v1.0
-docker push REGISTRY_URL/k8s-word-demo/k8s-words-db:v1.0
-docker push REGISTRY_URL/k8s-word-demo/k8s-words-api:v1.0
-docker push REGISTRY_URL/k8s-word-demo/k8s-words-web:v1.0
+$ docker build -t k8s-words-db:v1.0
+$ docker build -t k8s-words-api:v1.0
+$ docker build -t k8s-words-web:v1.0
+$ docker tag k8s-words-db:v1.0 REGISTRY_URL/k8s-word-demo/k8s-words-db:v1.0
+$ docker tag k8s-words-api:v1.0 REGISTRY_URL/k8s-word-demo/k8s-words-api:v1.0
+$ docker tag k8s-words-web:v1.0 REGISTRY_URL/k8s-word-demo/k8s-words-web:v1.0
+$ docker push REGISTRY_URL/k8s-word-demo/k8s-words-db:v1.0
+$ docker push REGISTRY_URL/k8s-word-demo/k8s-words-api:v1.0
+$ docker push REGISTRY_URL/k8s-word-demo/k8s-words-web:v1.0
 ```
 Remember to change REGISTRY_URL as yours.
 

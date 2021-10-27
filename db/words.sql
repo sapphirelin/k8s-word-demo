@@ -3,25 +3,25 @@ CREATE TABLE verbs (word TEXT NOT NULL);
 CREATE TABLE adjectives (word TEXT NOT NULL);
 
 INSERT INTO nouns(word) VALUES
-  ('bitnami'),
+  ('Sapphire'),
   ('vmware'),
   ('tanzu'),
   ('cøntainer'),
-  ('kubeapps'),
-  ('avi'),
+  ('Vic'),
+  ('Barry'),
   ('vsphere'),
-  ('nsx'),
+  ('Duncan'),
   ('devops'),
-  ('tmc'),
+  ('Raghu'),
   ('øctant'),
   ('map'),
   ('velerø'),
   ('tbs');
 
 INSERT INTO verbs(word) VALUES
-  ('imprøve'),
-  ('førward'),
-  ('up'),
+  ('super'),
+  ('超級'),
+  ('很'),
   ('walks tøwards'),
   ('løves'),
   ('helps'),
@@ -31,16 +31,10 @@ INSERT INTO verbs(word) VALUES
   ('will ship');
 
 INSERT INTO adjectives(word) VALUES
-  ('a pink'),
-  ('the røtten'),
-  ('a red'),
-  ('a shiny'),
-  ('the pretty'),
-  ('the impressive'),
-  ('an awesøme'),
-  ('the famøus'),
-  ('a gigantic'),
-  ('the gløriøus'),
-  ('the nørdic'),
-  ('the welcøming'),
-  ('the kubernetes');
+  ('powerful'),
+  ('可愛'),
+  ('美麗'),
+  ('shiny'),
+  ('pretty'),
+  ('impressive'),
+  ('awesøme');

@@ -4,7 +4,7 @@ original version [here](https://github.com/gyj0825/k8s-word-demo)
 
 This demo app included three containers:
 
-- [db](db/Dockerfile) - a Postgres database which stores words
+- [db](db/Dockerfile) - a Postgres database which stores words （名詞、副詞/動詞、形容詞）
 
 - [words](words/Dockerfile) - a Java REST API which serves words read from the database
 

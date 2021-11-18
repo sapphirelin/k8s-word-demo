@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: db
-        image: REGISTRY_URL/k8ssamples/k8s-words-db:v1.0
+        image: REGISTRY_URL/k8s-word-demo/k8s-words-db:v1.0
         ports:
         - containerPort: 5432
           name: db
@@ -66,7 +66,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: REGISTRY_URL/k8ssamples/k8s-words-api:v1.0
+        image: REGISTRY_URL/k8s-word-demo/k8s-words-api:v1.0
         env:
           - name: WORDS_DB_SERVICE
             value: words-db
@@ -106,7 +106,7 @@ spec:
     spec:
       containers:
       - name: words-web
-        image: REGISTRY_URL/k8ssamples/k8s-words-web:v1.0
+        image: REGISTRY_URL/k8s-word-demo/k8s-words-web:v1.0
         env:
           - name: WORDS_API_SERVICE
             value: words-api

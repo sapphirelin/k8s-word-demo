@@ -8,7 +8,7 @@ INSERT INTO nouns(word) VALUES
   ('tanzu'),
   ('cøntainer'),
   ('Vic'),
-  ('Barry'),
+  ('Phoenix'),
   ('vsphere'),
   ('Duncan'),
   ('devops'),
